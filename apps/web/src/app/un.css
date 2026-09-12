@@ -598,3 +598,18 @@
 }
 
 .un-card-bottom .un-renewal-soon { color: #805918; font-weight: 600; }
+
+/* Review-to-drafting handoff and operational entry points. */
+.un-workflow-banner { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 0 0 27px; padding: 18px 20px; background: #eff1e9; border: 1px solid #dce4d5; border-radius: 10px; }
+.un-workflow-banner strong { font-size: 13px; color: #36563e; }
+.un-workflow-banner p { font-size: 12px; color: #606f61; margin: 5px 0 0; }
+.un-workflow-banner .un-secondary { flex-shrink: 0; }
+.un-handoff-picker { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 15px; margin-bottom: 22px; }
+.un-handoff-picker label { font-weight: 600; }
+.un-handoff-picker span { font-size: 12px; color: var(--un-muted); }
+.un-review-facts { display: grid; gap: 10px; padding: 16px; background: #f6f8f2; border-radius: 8px; }
+.un-review-facts > span { display: grid; gap: 2px; color: #63735f; font-size: 12px; }
+.un-review-facts strong { color: #314d37; font-weight: 500; }
+.un-saved-detail > .un-primary { margin-right: 10px; margin-bottom: 10px; }
+@media (max-width: 1000px) { .un-workflow-banner { align-items: flex-start; flex-direction: column; } }
+@media (max-width: 650px) { .un-workflow-banner { padding: 16px; } .un-workflow-banner .un-secondary { width: 100%; } .un-handoff-picker select { width: 100%; } }

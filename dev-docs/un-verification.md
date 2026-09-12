@@ -2,39 +2,36 @@
 
 ## Automated checks
 
-- The final `npm run verify` passed after the email-entry and 30-day seed changes: workspace TypeScript checks, 37 agent-core, 22 channel and 101 web tests (160 total).
-- After changing Unit 04 to a lease ending exactly 30 days after the simulation date, the focused engine, storage and investigation-workspace suites passed: **38 tests** (20 engine, 12 storage, 6 workbench). These include the five seeded cases, calendar boundaries, requested increases, missing/conflicting evidence, saved snapshots, concurrent retries, version-aware deduplication, session isolation and request validation.
-- The revised Unit 04 seed ends October 12, 2026; its candidate effective date is October 13, 2026 and previous increase is October 13, 2025. Automated checks confirm its 2% draft remains $2,040, the 30-day trigger is inclusive, and a 60-day window keeps Units 04 and 09 due. The generic 12-month boundary checks use explicit independent dates.
-- The final production build passed with the new email-entry/processing UI, `/agent`, `/advisor`, `/operations`, their APIs and the parallel deployment middleware/standalone configuration. CopilotKit's transitive Google Vertex dependency reports an existing dynamic-dependency warning; the workbench CSS also reports one non-blocking alignment compatibility warning. The core UN demo does not use a live model.
+- `npm run verify` passed: all workspace TypeScript checks and **185 tests** (37 agent-core, 22 channel, 126 web).
+- The new handoff suite has **11 tests** covering saved snapshots, restart, concurrent drafting retries, separate immutable approvals, conflicting approval notes, session isolation, held cases, client-payload rejection, HTTP validation and storage protections.
+- The new operations suite has **10 tests** covering confirmed possession, inspection readiness, future turnover records, partial payments, future settlements, pending-payment separation, due-date boundaries and strict simulation dates.
+- A subsequent web typecheck passed after replacing the pre-handoff letter with a facts brief and limiting Ask UN to the review desk context.
+- Final production build: in progress at the time of this update.
 
-## Browser checks
+## Browser checks for the expanded demo
 
-Verified in the Codex in-app browser against the loopback preview. The email-entry and 30-day seed update also received a fresh browser check:
+Verified against `http://127.0.0.1:3100/` in the Codex in-app browser:
 
-- Default date and preferences show four due units, one prepared internal draft and three cases requiring attention.
-- Unit 04's working draft proposes $2,040 from a $2,000 base at the requested 2%; the ordinary 3% ceiling appears separately.
-- Cancelling review does not save. Confirming review creates one local packet with a reviewer note.
-- The same record ID and content can be reopened after reloading the page.
-- The same record was read again after stopping development mode and launching the production server.
-- JSON export was downloaded and read back: it includes the same record ID, five evidence records, the reviewer note and template version `un-illustrative-internal-v2`.
-- Changing the planning window and restoring 90 days was exercised. With the revised seed, the expected 60-day result is two due units, 04 and 09; restoring 90 days still produces four due units.
-- A 4% requested increase remains $2,080 and is held for revision; it is not silently reduced to 3%.
-- Unit 12's evidence includes both inconsistent increase dates; its notice tab does not create a definitive draft.
-- The Upcoming filter selects Unit 21 and explains that its proposed period is outside the loaded rule window.
-- The portfolio and review detail fit a 390-pixel viewport without document overflow. Selecting a unit brings its detail into view. The native confirmation dialog fits the mobile viewport and uses modal focus confinement.
-- No application console errors were observed during the development preview checks; a dependency's development-mode warning was present.
+1. Restarted onboarding, generated a random sample email and submitted it. The initial screen explicitly shows **UN · Evidence review / SIMULATED**, with document/email/database analysis, a role inference, and renewal/leasing/rent findings.
+2. Opened the default review desk: four renewal reviews, one proposal eligible for drafting, two vacant units, one overdue balance and one pending payment. Unit 04 remains exactly 30 days from its October 12 lease end.
+3. Inspected Unit 04's evidence, entered a review note, and confirmed the information packet. The UI navigated to **Draft approvals**, showing the saved names, source records, $2,000 → $2,040 proposal, October 13 candidate date and inferred property-manager role.
+4. Selected **Send to Ambiguous AI · demo**. The simulated processing steps appeared, then the server-backed draft returned with **Your draft is back for approval**.
+5. Entered a separate approval note and selected **Approve draft**. The page showed **Draft approved in the demo**. Reloaded and reopened Draft approvals: the same approval and note were restored.
+6. Opened **Leasing & rent**: Unit 05 has confirmed possession and completed turnover; Unit 17 has confirmed possession but incomplete turnover. Unit 12 has $1,350 remaining after $1,000 settled, 11 days after the sample due date. Unit 21 has $2,600 pending and no settled payment.
+7. Exercised **Late rent** and **Needs leasing** filters. The late-rent filter isolates Unit 12; expanding its evidence shows its lease, September charge, partial settlement and resident email. The later payment is not used before its date.
+8. Advanced the simulation to September 18 using the date field and ran the review. Both rent accounts became reconciled, pending and late totals became zero, and Unit 17 became ready for leasing preparation. Restored September 12 afterward.
+9. Visually checked desktop at 1280 pixels and mobile at 390 pixels. Operations and draft approvals had no document overflow (`scrollWidth === clientWidth === 390`). Temporary viewport overrides are reset after testing.
 
-## Email entry and simulated Ambiguous AI flow
+The tested saved packet is `a5752c41-0447-4933-846b-c60579eb0d98`; its simulated handoff is `12abaa21-b520-421e-9e8b-9aefdcb2b0df`. These are fictional demo records in this browser session, not production records or a provider task.
 
-- A fresh visit shows email entry before mounting the unit review desk. Invalid email input is rejected; the random sample-email button creates a usable `example.com` address.
-- Submitting shows the clearly labeled **Ambiguous AI / Mock workflow workspace / SIMULATED** screen. Four timed steps finish, and **Show 4 units needing attention** becomes available. The screen starts at the top of the page.
-- **Skip animation** completes the preview immediately without a later timer reverting progress.
-- The opened desk shows Unit 04 with **30 days to lease end**, October 12, 2026 lease end and October 13 candidate effective date. Its internal 2% proposal remains $2,040.
-- A 60-day window shows two due units. Reload preserves the completed walkthrough and the chosen review preferences.
-- **Restart demo** returns to email entry. Finishing a new walkthrough restores the default four-unit queue and 2% proposal. Saved-review count is unchanged by replay.
-- A reviewed packet for the revised 30-day case was saved successfully; earlier snapshots remain available.
-- Reloading an unfinished walkthrough returns to email entry safely.
-- Entry and processing screens fit a 390-pixel mobile viewport without document overflow. Supporting text and simulation labels were enlarged and darkened after visual inspection.
-- Source review confirms the entered email is used only in browser state, `sessionStorage`, and a displayed demo label. It is absent from request payloads, saved packets, and assistant context. The mock processing screen creates no Ambiguous AI tasks or mailbox connection.
+## Review findings resolved
 
-The sample preferences were restored after testing. One reviewed Unit 04 packet from the earlier seed remains in the demo browser's session. Saving its revised 30-day case creates a new snapshot while retaining the older reviewed version. Live model calls, background scheduling, external property systems and notice service were not exercised or claimed.
+- The review desk now shows an evidence/pricing brief before the handoff. It no longer shows the full letter prematurely; the returned letter appears in Draft approvals.
+- Ask UN is shown only on the review desk, whose current renewal cases match its context. It is hidden in saved, approval and operations views.
+- The random email remains a browser-only label and is absent from saved review and handoff payloads.
+
+## Earlier regression coverage
+
+Existing suites continue to cover the LA rule fixture, 12-month calendar boundaries, requested-rate preservation, unknown coverage, inconsistent increase dates, missing/future evidence, expired rule periods, immutable review snapshots, concurrent saves and session isolation. Earlier browser checks covered 4% proposals staying blocked, the 60-day queue containing Units 04 and 09, held Unit 12 follow-ups, saved-review JSON export, and review preferences surviving reload.
+
+All provider processing in the new handoff is simulated. No live model, mailbox, Ambiguous AI account, property database, tenant message, listing publication, notice service or rent update was exercised or claimed.

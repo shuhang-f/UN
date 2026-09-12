@@ -11,10 +11,10 @@ const hero = sampleReviews.find(item => item.unit.unitNumber === "04")!;
 const attentionCount = sampleReviews.filter(item => item.status !== "upcoming").length;
 const draftCount = sampleReviews.filter(item => item.draft !== null).length;
 const steps = [
-  { title: "Load sample correspondence", detail: "Bring fictional lease messages and rent records into the demo." },
-  { title: "Find renewals needing attention", detail: `Unit 04’s lease ends in ${hero.daysUntilRenewal} days. ${attentionCount} units are in the review window.` },
-  { title: "Compare rent and coverage records", detail: "Check the sample pricing instruction, timing, and conflicting evidence." },
-  { title: "Stage review tasks", detail: "Prepare draft-review and follow-up cards in this mock Ambiguous AI workspace." },
+  { title: "Read documents, email, and database records", detail: "Compare fictional leases, manager messages, unit status, and dated rent transactions." },
+  { title: "Infer the property-manager workspace", detail: "Lease administration and portfolio instructions suggest a property-manager role. Review this inference on the desk." },
+  { title: "Identify what needs attention", detail: `Unit 04 renews in ${hero.daysUntilRenewal} days. Units 05 and 17 need leasing work; Unit 12 has an overdue balance.` },
+  { title: "Prepare the manager’s review", detail: "Review the evidence first, then send a confirmed packet to mock Ambiguous AI for drafting and approval." },
 ];
 const money = (value: number) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value);
 
@@ -77,7 +77,7 @@ export function UNDemoEntry({ children }: { children: (restart: () => void, emai
       <section className="ude-intro">
         <p className="ude-eyebrow">A LITTLE CLARITY, EVERY DAY</p>
         <h1>Your next review<br/>starts here.</h1>
-        <p className="ude-lead">Upcoming renewals. Scattered records. One clear place to decide what happens next.</p>
+        <p className="ude-lead">Renewals, vacant units, and overdue rent. One clear place to review the evidence and decide what happens next.</p>
         <form className="ude-form" onSubmit={start}>
           <label htmlFor="ude-email">Enter an email to explore your demo</label>
           <div className="ude-email-input"><span aria-hidden="true">@</span><input ref={emailRef} id="ude-email" name="demoEmail" type="email" inputMode="email" autoComplete="off" placeholder="manager@example.com" maxLength={254} required value={email} onChange={event => { setEmail(event.target.value); setValidation(""); }} aria-describedby="ude-email-help"/></div>
@@ -93,28 +93,28 @@ export function UNDemoEntry({ children }: { children: (restart: () => void, emai
         <div className="ude-preview-caption"><span>YOUR DAILY REVIEW, AHEAD OF TIME</span><span>01 / 03</span></div>
         <div className="ude-sample-card">
           <div className="ude-sample-top"><span className="ude-building-icon" aria-hidden="true">⌂</span><div><strong>Juniper Residential</strong><small>Los Angeles · fictional portfolio</small></div><span className="ude-sample-dot"/></div>
-          <div className="ude-renewal"><span>COMING UP NEXT</span><span className="ude-days">In {hero.daysUntilRenewal} days</span><h2>Unit 04’s lease is<br/>coming up for renewal.</h2><p>A rent proposal and the records behind it, ready for your review.</p></div>
+          <div className="ude-renewal"><span>COMING UP NEXT</span><span className="ude-days">In {hero.daysUntilRenewal} days</span><h2>Unit 04’s lease is<br/>coming up for renewal.</h2><p>Review the proposal, send the evidence to mock Ambiguous AI, and approve the draft that comes back.</p></div>
           <div className="ude-rent"><div><span>Current base rent</span><strong>{money(hero.unit.baseRent)}</strong></div><Arrow/><div><span>Your {hero.requestedIncreasePercent}% proposal</span><strong>{money(hero.requestedRent)}</strong></div></div>
           <div className="ude-preview-task"><span className="ude-check"><Tick/></span><div><strong>Prepare the notice draft</strong><small>Internal draft · manager review required</small></div></div>
         </div>
-        <div className="ude-floating-note"><span>↗</span><div><strong>{attentionCount} units need attention</strong><p>One review desk. Every next step in view.</p></div></div>
-        <p className="ude-preview-foot">Demo date: September 12, 2026 · {demoUnits.length} sample units</p>
+        <div className="ude-floating-note"><span>↗</span><div><strong>{attentionCount} renewal reviews + leasing & rent</strong><p>Two vacant units. One overdue rent balance.</p></div></div>
+        <p className="ude-preview-foot">Demo date: September 12, 2026 · {demoUnits.length} occupied + 2 vacant sample units</p>
       </aside>
     </main> : <main className="ude-processing">
       <div className="ude-process-heading"><p className="ude-eyebrow">FROM RECORDS TO NEXT STEPS</p><h1>{finished ? "Your review is ready." : "Preparing your review desk."}</h1><p>Demo workspace for <strong className="ude-email-label">{email}</strong></p></div>
-      <section className="ude-process-panel" aria-label="Mock Ambiguous AI processing">
-        <header className="ude-process-header"><div className="ude-provider"><span className="ude-ambiguous-mark" aria-hidden="true">a.</span><div><strong>Ambiguous AI</strong><small>Mock workflow workspace</small></div></div><span className="ude-simulation-badge">SIMULATED</span></header>
+      <section className="ude-process-panel" aria-label="Mock document and portfolio analysis">
+        <header className="ude-process-header"><div className="ude-provider"><span className="ude-ambiguous-mark" aria-hidden="true">a.</span><div><strong>UN · Evidence review</strong><small>Mock document, email & database analysis</small></div></div><span className="ude-simulation-badge">SIMULATED</span></header>
         <div className="ude-process-grid"><section className="ude-progress-column" aria-label="Processing stages">
           <div className="ude-progress-caption"><strong>{finished ? "Sample review prepared" : "Working through the sample records"}</strong><span>{completedSteps} / {steps.length}</span></div>
           <progress className="ude-progress" max={steps.length} value={completedSteps} aria-label="Demo processing progress"/>
           <ol className="ude-steps">{steps.map((step, index) => <li key={step.title} className={index < completedSteps ? "complete" : index === completedSteps ? "active" : "queued"}><span className="ude-step-number">{index < completedSteps ? <Tick/> : String(index + 1).padStart(2, "0")}</span><div><strong>{step.title}</strong><p>{step.detail}</p><small>{index < completedSteps ? "Complete" : index === completedSteps ? "In progress" : "Queued"}</small></div></li>)}</ol>
-          <p className="ude-process-live" role="status" aria-live="polite">{finished ? `${attentionCount} units need attention. ${draftCount} internal draft is prepared.` : steps[completedSteps].title + "…"}</p>
-        </section><aside className="ude-mock-board" aria-label="Mock Ambiguous task preview"><div className="ude-board-heading"><span>REVIEW QUEUE</span><span>Sample tasks</span></div><h2>Ready for a human decision.</h2>
+          <p className="ude-process-live" role="status" aria-live="polite">{finished ? `${attentionCount} renewal reviews, 2 leasing cases, and 1 overdue rent balance. ${draftCount} proposal is ready for a drafting handoff.` : steps[completedSteps].title + "…"}</p>
+        </section><aside className="ude-mock-board" aria-label="Mock portfolio task preview"><div className="ude-board-heading"><span>REVIEW QUEUE</span><span>Sample tasks</span></div><h2>Ready for a human decision.</h2>
           <article className="ude-board-card"><div><span className="ude-priority">Due in {hero.daysUntilRenewal} days</span><span>Unit 04</span></div><h3>Review the renewal proposal</h3><p>{money(hero.unit.baseRent)} → {money(hero.requestedRent)} per month</p><footer><span className="ude-assignee">AM</span><span>Alex Morgan</span><span>Draft review</span></footer></article>
-          <article className="ude-board-card secondary"><div><span className="ude-evidence-badge">Needs evidence</span><span>Unit 12</span></div><h3>Reconcile the last increase date</h3><p>The ledger and correspondence disagree. Retrieve the prior notice.</p><footer><span className="ude-assignee">AM</span><span>Alex Morgan</span><span>Follow-up</span></footer></article>
-          <p className="ude-board-note">A preview of the workflow handoff. These cards are simulated; no tasks are sent to Ambiguous AI.</p>
+          <article className="ude-board-card secondary"><div><span className="ude-evidence-badge">Needs evidence</span><span>Unit 12</span></div><h3>Review the overdue rent balance</h3><p>$1,350 remains after a partial payment. Check the ledger and resident email.</p><footer><span className="ude-assignee">AM</span><span>Alex Morgan</span><span>Follow-up</span></footer></article>
+          <p className="ude-board-note">This initial scan uses sample records. The Ambiguous AI drafting simulation starts after you review and save a unit’s evidence.</p>
         </aside></div>
-        <footer className="ude-process-footer"><p>Simulation only · seeded records · no mailbox connection</p><div>{!finished && <button className="ude-text-button" onClick={() => setCompletedSteps(steps.length)}>Skip animation</button>}<button className="ude-primary" disabled={!finished} onClick={finish}>Show {attentionCount} units needing attention <Arrow/></button></div></footer>
+        <footer className="ude-process-footer"><p>Simulation only · seeded records · no mailbox connection</p><div>{!finished && <button className="ude-text-button" onClick={() => setCompletedSteps(steps.length)}>Skip animation</button>}<button className="ude-primary" disabled={!finished} onClick={finish}>Show my review desk <Arrow/></button></div></footer>
       </section>
       <button className="ude-text-button ude-back" onClick={restart}>← Use a different demo email</button>
     </main>}

@@ -17,13 +17,13 @@ Open [UN](http://127.0.0.1:3100/). The web process binds to loopback. Keep using
 
 Enter any valid email-shaped address, or choose **Use a random sample email**, then **Open my demo workspace**. The email is a browser-only demo label; no sign-in, mailbox access, email delivery or account creation happens. All addresses open the same sample portfolio.
 
-The next screen is explicitly labeled **Ambiguous AI — Mock workflow workspace / SIMULATED**. Its four animated steps stage example review and follow-up cards from the sample records. After processing, choose **Show 4 units needing attention**. **Skip animation** makes the final button available immediately. No request or task is sent to Ambiguous AI by this walkthrough.
+The first processing screen is **UN · Evidence review / SIMULATED**. It reads sample document, email and database records, presents the inferred property-manager role, and identifies renewal, leasing and rent-balance work. Choose **Show my review desk** after processing, or **Skip animation**. The separate Ambiguous AI drafting simulation begins only after the manager reviews and saves a unit’s evidence.
 
 The completed walkthrough is remembered in this tab's `sessionStorage` under `un-demo-entry-v1`, so reloads reopen the desk. **Restart demo** returns to email entry. Finishing a new walkthrough restores the sample review preferences while keeping the separate saved-review database intact. If browser storage is unavailable, the flow still works for the current visit.
 
 The initial simulation date is **September 12, 2026**. Preferences start at a **90-day internal review window**, **2% requested increase**, and reviewer **Alex Morgan**. This planning window is not a legal notice period. The fixed rule fixture covers an ordinary LA City RSO adjustment for July 1, 2026–June 30, 2027; the demo does not apply that rate to other periods or jurisdictions.
 
-## Five sample cases
+## Seven sample units
 
 All people, properties, addresses and private records are fictional. The synthetic portfolio is Juniper Court, presented in the Juniper Residential demo workspace.
 
@@ -33,16 +33,20 @@ All people, properties, addresses and private records are fictional. The synthet
 | 12 | Lease ends November 30; ledger says last increase March 1, 2026; correspondence says December 1, 2025. | Needs evidence. Retain both dates and assign a reconciliation task; no definitive increase draft. |
 | 08 | Lease ends December 10; unit-specific RSO coverage is unresolved. | Needs evidence. Request unit-level coverage information instead of assuming a property-level record covers every unit. |
 | 09 | Lease ends October 31; the recorded last increase was March 1, 2026. | Timing blocked. The candidate November 1, 2026 date precedes the next 12-month anniversary. |
-| 21 | Lease ends August 31, 2027. | Upcoming, outside the 90-day window. Its September 1, 2027 candidate date is also outside the loaded rule period. |
+| 21 | Lease ends August 31, 2027. | Upcoming renewal. A separate $2,600 pending payment needs settlement verification; it is not treated as settled cash. |
+| 05 | Confirmed possession and completed turnover. | Vacant and ready for listing preparation. |
+| 17 | Confirmed possession, turnover incomplete. | Vacant; finish turnover before marketing as ready. |
 
-## Two-minute showcase
+The operational ledger also shows Unit 12 with $1,350 remaining after a partial September payment, 11 days after the due date. This is separate from its unresolved renewal evidence. The operations module keeps pending payments separate from confirmed overdue balances and never treats lease expiration alone as proof of vacancy.
 
-1. Enter a sample email, show the simulated Ambiguous AI processing screen, and open the four units needing attention. On **Review desk**, the **Demo date** is September 12, 2026; Unit 21 remains upcoming.
-2. Open Unit 04, whose lease ends in exactly **30 days**, on October 12. Compare the rent calculation and the separate ordinary ceiling. Open **Evidence** to inspect the fictional sources and **Notice draft** to show the October 13 candidate effective date and pending checks.
-3. Open Unit 12 and show the conflicting ledger and correspondence dates, the assigned follow-up and the absence of a definitive draft.
-4. Open **Preferences**, change the internal window to 60 days, and save the preferences. The November and December leases leave the active window; **Units 04 and 09 remain due**, giving two units in review. Unit 04 still has its internal draft. Restore 90 days for the main showcase. Preferences are retained in browser local storage.
-5. Return to Unit 04 and choose **Review & save draft**. Add a reviewer note, then **Confirm review & save**. Choosing **Cancel** closes the review without a write. Blocked cases use **Review & save follow-up** and can retain their unresolved work.
-6. Open **Saved reviews**, refresh the browser and inspect the same record ID, evidence, draft and next steps. Choose **Export full review packet** to download `UN-unit-04-review.json`.
+## Three-minute showcase
+
+1. Enter any sample email, show the initial document/email/database analysis, then open the desk. The role is an inference from sample records; email is only a browser label.
+2. Open Unit 04, whose lease ends in **30 days**. Show **Evidence**, the $2,000 → $2,040 proposal, and the separate ordinary ceiling. Select **Review evidence & continue**, add a note, then **Confirm review & continue**.
+3. On **Draft approvals**, inspect the exact saved packet and role inference. Choose **Send to Ambiguous AI · demo**. The simulated steps return an illustrative rent-adjustment letter to this in-app approval desk.
+4. Read the returned letter, add an approval note, and choose **Approve draft**. The mock database persists both the returned draft and explicit approval. Reload and reopen **Draft approvals** to demonstrate persistence. Export the letter if useful. No real provider task, email, notice service, or rent update occurs.
+5. Open **Leasing & rent**. Unit 05 is ready for listing preparation, Unit 17 needs turnover, and Unit 12 has $1,350 outstanding. Inspect the dated source records and tasks. Unit 21’s pending payment stays a separate settlement-review case.
+6. Return to Unit 12’s renewal review to show conflicting increase dates and why a definitive increase draft is held. A follow-up can still be saved.
 
 For another meaningful variation, set the requested increase to 4% and rerun the review: the known 3% ceiling blocks the proposal without silently replacing the manager's instruction. A 0% instruction produces an unchanged-rent follow-up, not an increase draft. Advance the simulation date to June 2, 2027 to bring Unit 21 into its 90-day window; it needs a rule for the new period rather than reusing the expired fixture.
 
@@ -60,7 +64,15 @@ The API is [the UN reviews route](../apps/web/src/app/api/un/reviews/route.ts), 
 - An HttpOnly, SameSite=Strict cookie named `un-review-session` is scoped to `/api/un/reviews` and lasts 30 days. Each session has a separate hashed storage directory. Clearing or expiring the cookie starts a new history; it does not delete the previous files. This is a local demo session, not a shared account system.
 - Files are published atomically. Identical normalized inputs and an identical recomputed packet return the existing record ID, including concurrent retries. Changed evidence, rule/template output, date, preferences or reviewer note creates a separate immutable snapshot while preserving earlier records.
 
-The saved record contains its ID and creation time, simulation date, preferences, reviewer note, full unit/evidence snapshot, calculation, blockers, next steps, rule reference and draft body/version when available. Export downloads this saved snapshot. Save approval records an internal review; it does not indicate notice service or a rent change.
+The saved record contains its ID and creation time, simulation date, preferences, reviewer note, full unit/evidence snapshot, calculation, blockers, next steps, rule reference and draft body/version when available. Export downloads this saved snapshot. Saving the evidence records the manager’s initial review. A separate draft handoff and explicit draft approval occur afterward; neither indicates notice service or a rent change.
+
+## Simulated drafting and operational records
+
+`un-handoff-types.ts`, `server/un-handoffs.ts` and `/api/un/reviews/handoff` implement the mock provider return and approval history. The handoff uses the same browser session as saved reviews. The server derives all letter inputs from that session’s saved review; the client submits only a review ID. Held or incomplete reviews cannot produce a returned increase letter. Drafting retries reuse the existing run, and approval is a distinct persisted state.
+
+`un-operations.ts` contains the additional operational fixtures and dated source records; `reviewOperations(asOf)` determines leasing work, settled balances and pending payments. `UNOperationsBoard` displays those findings with evidence and next steps. Payment figures are a sample ledger reconciliation, not legal demands or assessed late fees.
+
+The drafting simulation is deterministic. The animation illustrates a future provider handoff; no network connection to Ambiguous AI is needed. The returned draft is shown in the manager’s **Draft approvals** view rather than emailed to the random demo address.
 
 ## Optional assistant
 
