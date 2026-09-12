@@ -10,6 +10,24 @@
 
 </div>
 
+## UN: your property review desk
+
+UN prepares renewal reviews for a fictional Los Angeles portfolio. Run `npm ci` and `npm run dev:web`, then open [UN](http://127.0.0.1:3100/). No API keys are required for the demo.
+
+Enter any sample email, walk through a clearly labeled mock Ambiguous AI processing screen, and open five sample units. Unit 04's lease ends in 30 days. Compare lease and rent evidence, inspect an internal rent-increase draft, adjust review preferences, and save complete review packets to a local JSON database. Then inspect Unit 12's conflicting records. The review runs when you open the desk or press **Run daily review**; it does not connect to a live inbox or run a background schedule.
+
+See the [UN demo guide](dev-docs/un-demo.md) for setup, data storage, and a walkthrough. Existing operations workflows remain at [`/operations`](http://127.0.0.1:3100/operations) and the earlier workflow explorer is at [`/advisor`](http://127.0.0.1:3100/advisor).
+
+## UN: vacancy and maintenance operations
+
+UN’s operations workspace helps multifamily property managers review vacancy and maintenance messages, choose a workflow, and save an approved plan. Run `npm ci` and `npm run dev:web`, then open [UN operations](http://127.0.0.1:3100/operations). The homepage focuses on renewal reviews.
+
+Choose **Try a sample portfolio** for a demonstration without API keys. Guided assessment, local workflow saves, and existing-product links work without external accounts. Model chat, public company research through Exa, and Ambiguous task saves are optional configured capabilities; no inbox or property-management platform is connected.
+
+See the [three-minute demo and setup guide](dev-docs/property-demo.md) and [integration capabilities and boundaries](dev-docs/property-integrations.md). The original starter instructions follow below.
+
+For the UN homepage's product direction, see the [bus ticket theory review](dev-docs/bus-ticket-product-review.md): the source essay, current implementation findings, and a proposed workflow for investigating discrepancies and retaining confirmed resolutions.
+
 ## Overview
 
 Build for **[Agents, Everywhere: Bots, Channels, & More](https://aitinkerers.org/hackathons/global/agents-everywhere)**, the AI Tinkerers global hackathon on **September 12–13, 2026**. Choose your city on the event page for its local schedule. Put an agent inside a conversation, an app, a phone, or a physical environment. Make the context of that place essential to what it can do.

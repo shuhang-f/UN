@@ -3,6 +3,7 @@ import { randomBytes } from "node:crypto";
 import { z } from "zod";
 import { FollowupService } from "./followups";
 import type { Workplace } from "./workplace";
+import { trustedAppOrigin } from "./deployment";
 const cookieName = "web-followup-session";
 const command = z.discriminatedUnion("operation", [
   z
@@ -35,9 +36,8 @@ export function createFollowupHandler(options: {
 }) {
   return async (request: Request) => {
     const url = new URL(request.url);
-    // Next may normalize request.url to localhost. Compare Origin with the actual HTTP Host.
-    const expectedOrigin = new URL(url);
-    expectedOrigin.host = request.headers.get("host") || url.host;
+    const expectedOrigin = trustedAppOrigin(request);
+    if (!expectedOrigin) return Response.json({ error: "Untrusted app host." }, { status: 403 });
     const cookie = request.headers
       .get("cookie")
       ?.split(";")
@@ -53,21 +53,11 @@ export function createFollowupHandler(options: {
           "Cache-Control": "no-store",
           ...(!hasSession
             ? {
-                "Set-Cookie": `${cookieName}=${session}; HttpOnly; SameSite=Strict; Path=/api/followups; Max-Age=86400${url.protocol === "https:" ? "; Secure" : ""}`,
+                "Set-Cookie": `${cookieName}=${session}; HttpOnly; SameSite=Strict; Path=/api/followups; Max-Age=86400${expectedOrigin.protocol === "https:" ? "; Secure" : ""}`,
               }
             : {}),
         },
       });
-    // A matching arbitrary Host/Origin can be DNS rebinding against a local credential.
-    // Deployment must add authenticated users and a deliberate trusted-origin allowlist.
-    if (
-      !["localhost", "127.0.0.1", "[::1]"].includes(expectedOrigin.hostname)
-    ) {
-      return Response.json(
-        { error: "This demo accepts loopback hosts only." },
-        { status: 403 },
-      );
-    }
     if (request.method !== "GET" && request.method !== "POST")
       return reply({ error: "Method not allowed." }, 405);
     if (

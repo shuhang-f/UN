@@ -4,6 +4,8 @@ Start with the [hackathon homepage](../README.md), choose a [template](../README
 
 | Doc | When you need it |
 |---|---|
+| [Bus ticket theory: UN product review](bus-ticket-product-review.md) | Paul Graham reference, review of the current desk, and proposed evidence-resolution workflow |
+| [UN agent architecture](un-agent-architecture.md) | Project history, competitive overlap, deterministic scenario backend and flexible investigation workspace |
 | [Sponsor tool guide](../using-sponsor-tools.md) | Authentication, configuration, and a first working call for each featured sponsor |
 | [Auth0 protected API recipe](auth0/README.md) | Optional machine-to-machine authorization reference for a protected local API |
 | [Channels screenshot walkthrough](channels-sdk-walkthrough/README.md) | Intelligence, Slack installation, runtime, and a verified native-card conversation |

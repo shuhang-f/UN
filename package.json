@@ -14,6 +14,9 @@
     "apps/web"
   ],
   "scripts": {
+    "build": "npm run build --workspace web",
+    "start": "npm run start --workspace web",
+    "check:deployment": "node scripts/check-deployment.mjs",
     "dev": "npm run dev:web",
     "dev:slack": "npm run dev --workspace channel",
     "channel:status": "npx copilotkit@latest channels status --json",

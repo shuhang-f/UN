@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { Providers } from "@/components/providers";
+import { resolveModel } from "agent-core";
 import "@copilotkit/react-core/v2/styles.css";
 import "./globals.css";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
-  title: "Incident assistant — Agents, Everywhere",
-  description: "Pick an incident, ask your assistant, and add a follow-up.",
+  title: "UN — Your property review desk",
+  description: "A daily review desk for property managers. Prepare renewal drafts, reconcile evidence, and keep every next step on record.",
 };
 
 export default function RootLayout({
@@ -13,6 +16,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  let modelConfigured = false;
+  try { resolveModel(); modelConfigured = true; } catch { /* Guided mode works without credentials. */ }
   return (
     <html lang="en">
       <head>
@@ -22,7 +27,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Providers>{children}</Providers>
+        <Providers enabled={modelConfigured}>{children}</Providers>
       </body>
     </html>
   );

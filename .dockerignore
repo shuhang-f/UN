@@ -1,0 +1,17 @@
+**/node_modules
+**/.next
+**/.data
+**/.env*
+**/*.log
+**/*.tsbuildinfo
+.git
+.github
+.agents
+.claude
+.cursor
+.codex
+.mcp.json
+.sites-runtime
+assets
+dev-docs
+apps/mobile

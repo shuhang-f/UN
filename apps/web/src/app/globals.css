@@ -531,3 +531,34 @@ p {
   font-size: 13px;
   overflow-wrap: anywhere;
 }
+
+/* Groundwork intake and workflow review */
+.groundwork { max-width: 1240px; margin: auto; padding: 28px 36px 80px; }
+.groundwork header { display:flex; justify-content:space-between; gap:20px; border-bottom:1px solid #d7d9d3; padding-bottom:22px; font-size:11px; letter-spacing:.08em; }
+.groundwork header a { color:inherit; text-decoration:none; font-weight:700; }
+.groundwork header span { color:#626b61; }
+.gw-hero { padding:64px 0 42px; }
+.gw-hero h1 { font-size:clamp(30px,4vw,52px); line-height:1.15; letter-spacing:-.045em; font-weight:500; }
+.gw-hero>p:last-child { max-width:620px; color:#626b61; font-size:16px; }
+.gw-kicker { font-size:11px; letter-spacing:.12em; color:#53614d; font-weight:700; }
+.gw-columns { display:grid; grid-template-columns:minmax(0, .9fr) minmax(0,1.1fr); gap:28px; align-items:start; }
+.gw-panel { background:#fff; border:1px solid #d9ddd5; border-radius:16px; padding:28px; margin-bottom:24px; }
+.gw-panel h2 { font-size:22px; font-weight:500; letter-spacing:-.025em; }
+.gw-fields { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.groundwork label { display:block; font-size:12px; font-weight:600; margin-bottom:18px; }
+.groundwork input,.groundwork select,.groundwork textarea { display:block; width:100%; padding:11px; border:1px solid #d6dcd2; border-radius:7px; background:#fbfcfa; color:inherit; margin-top:7px; font:inherit; }
+.groundwork textarea { min-height:110px; resize:vertical; }
+.groundwork button { padding:11px 17px; border:1px solid #bdc8b6; border-radius:7px; background:#f0f4ed; color:#253a24; }
+.groundwork button:disabled { opacity:.5; cursor:default; }
+.groundwork .gw-primary { background:#2e472b; color:#fff; width:100%; margin-top:20px; }
+.groundwork details { margin:16px 0; }
+.groundwork small,.gw-small { display:block; font-size:11px; color:#66705f; }
+.gw-small { margin:12px 0 0; }
+.groundwork li { margin-bottom:14px; }
+.groundwork li p { margin:5px 0 0; }
+.gw-tool { padding:14px 0; border-top:1px solid #e6e9e2; }
+.gw-tool a { color:#345530; font-weight:600; }
+.gw-tool p { margin:5px 0; }
+.groundwork blockquote { margin:16px 0; border-left:3px solid #a9b99f; padding:10px 16px; background:#f5f7f2; }
+.gw-error { color:#9c2727; }
+@media(max-width:760px) { .groundwork { padding:20px; } .gw-columns,.gw-fields { grid-template-columns:1fr; } .groundwork header>span { display:none; } .gw-hero { padding-top:40px; } }
