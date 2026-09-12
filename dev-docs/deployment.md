@@ -47,6 +47,6 @@ Gateway source checkouts are sibling directories `un-site` and `un-short-site`. 
 
 GitHub CI runs `npm run verify`, production build, standalone checks, gateway tests, and a Docker build. Run `npm run check:deployment` after building to repeat the standalone checks locally.
 
-Railway currently accepts `railway.json` but warns that configuration-as-code support ends December 1, 2026. Migrate to its infrastructure configuration before that date.
+Railway's new-service settings are authoritative: Dockerfile detection, health path `/api/health`, timeout 120 seconds, and three restart retries. The legacy `railway.json` records the intended settings, but new services cannot opt into Config as Code after August 28, 2026. Use service settings or Railway Infrastructure as Code for future changes; do not assume editing that legacy file changes the live service.
 
 References: [Railway Next.js](https://docs.railway.com/guides/nextjs), [persistent volumes](https://docs.railway.com/volumes), [configuration](https://docs.railway.com/config-as-code/reference).
