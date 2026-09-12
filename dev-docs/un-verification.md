@@ -6,7 +6,7 @@
 - The new handoff suite has **11 tests** covering saved snapshots, restart, concurrent drafting retries, separate immutable approvals, conflicting approval notes, session isolation, held cases, client-payload rejection, HTTP validation and storage protections.
 - The new operations suite has **10 tests** covering confirmed possession, inspection readiness, future turnover records, partial payments, future settlements, pending-payment separation, due-date boundaries and strict simulation dates.
 - A subsequent web typecheck passed after replacing the pre-handoff letter with a facts brief and limiting Ask UN to the review desk context.
-- Final production build: in progress at the time of this update.
+- Final `npm run build --workspace web` passed, including the new handoff API, TypeScript validation, static generation and standalone packaging. The existing transitive Google Vertex dynamic-dependency warning remains non-blocking. The local preview was restarted in development mode afterward.
 
 ## Browser checks for the expanded demo
 
