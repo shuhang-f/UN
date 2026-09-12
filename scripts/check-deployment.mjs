@@ -14,7 +14,9 @@ probe.listen(0, "127.0.0.1");
 await once(probe, "listening");
 const port = probe.address().port;
 await new Promise(resolve => probe.close(resolve));
-const origin = "https://un-smoke.example";
+// Node's fetch may ignore a custom Host header. Keep the actual host and
+// simulate TLS termination by configuring the public HTTPS origin on this port.
+const origin = `https://127.0.0.1:${port}`;
 const password = "offline-smoke-test-password-12345";
 const env = { ...process.env, NODE_ENV: "production", HOSTNAME: "127.0.0.1", PORT: String(port),
   WEB_APP_ORIGIN: origin, WEB_DEMO_PASSWORD: password, WEB_DEMO_USERNAME: "un", UN_DATA_DIR: directory };
