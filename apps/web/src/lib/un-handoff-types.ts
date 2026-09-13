@@ -1,12 +1,12 @@
 import type { UnEvidence } from "./un-types";
 
-/** A persisted simulation: approval never sends a notice or calls a provider. */
+/** A reviewed packet saved as an Ambiguous task; manager approval stays local. */
 export interface UnHandoffRun {
   id: string;
   reviewId: string;
   unitId: string;
   unitNumber: string;
-  mode: "simulated";
+  mode: "ambiguous";
   status: "awaiting-approval" | "approved";
   createdAt: string;
   reviewer: string;
@@ -21,11 +21,20 @@ export interface UnHandoffRun {
   letter: { title: string; body: string };
   approvedAt: string | null;
   approvalNote: string;
+  /** Present only on a refresh response when this cached task could not be verified. */
+  verificationError?: string;
+  externalTask: {
+    id: string;
+    url: string | null;
+    workspaceId: string;
+    identityName: string;
+    verifiedAt: string;
+  };
 }
 
 export type UnHandoffInput =
-  | { action: "draft"; reviewId: string }
+  | { action: "draft"; reviewId: string; approved: true }
   | { action: "approve"; runId: string; approvalNote: string };
 
-export interface UnHandoffsResponse { runs: UnHandoffRun[] }
+export interface UnHandoffsResponse { runs: UnHandoffRun[]; ambiguousConfigured: boolean }
 export interface UnHandoffResponse { run: UnHandoffRun }
