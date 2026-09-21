@@ -1,5 +1,6 @@
 import { dataDirectory } from "@/lib/server/data-directory";
 import { createUnHandoffsHandler } from "@/lib/server/un-handoffs";
+import { configuredWorkplace } from "@/lib/server/workplace";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -7,6 +8,8 @@ export const dynamic = "force-dynamic";
 const handler = createUnHandoffsHandler({
   directory: dataDirectory("un-handoffs"),
   reviewsDirectory: dataDirectory("un-reviews"),
+  isAmbiguousConfigured: () => !!process.env.AMBIGUOUS_API_KEY?.trim(),
+  connect: () => process.env.AMBIGUOUS_API_KEY?.trim() ? configuredWorkplace() : undefined,
 });
 export const GET = handler;
 export const POST = handler;

@@ -206,21 +206,37 @@ test("HTTP rejects oversized byte bodies and malformed JSON without saving", asy
 });
 
 test("storage never follows session or record symlinks outside the provided directory", async (t) => {
-  const { directory, service } = await fixture(t);
-  const outside = await mkdtemp(join(tmpdir(), "un-outside-"));
-  t.after(() => rm(outside, { recursive: true, force: true }));
-  const sessionDirectory = join(directory, createHash("sha256").update(session).digest("hex"));
-  await symlink(outside, sessionDirectory);
-  await assert.rejects(service.save(session, input));
-  await assert.rejects(service.list(session));
-  assert.deepEqual(await readdir(outside), []);
-  await rm(sessionDirectory);
-  await mkdir(sessionDirectory);
-  const outsideFile = join(outside, "secret.json");
-  await writeFile(outsideFile, "local-secret-do-not-return");
-  await symlink(outsideFile, join(sessionDirectory, `${"b".repeat(64)}.saved.json`));
-  await assert.rejects(service.list(session));
-  assert.equal(await readFile(outsideFile, "utf8"), "local-secret-do-not-return");
+  await t.test("rejects a session directory link, including Windows junctions", async (t) => {
+    const { directory, service } = await fixture(t);
+    const outside = await mkdtemp(join(tmpdir(), "un-outside-"));
+    t.after(() => rm(outside, { recursive: true, force: true }));
+    const sessionDirectory = join(directory, createHash("sha256").update(session).digest("hex"));
+    await symlink(outside, sessionDirectory, process.platform === "win32" ? "junction" : "dir");
+    await assert.rejects(service.save(session, input));
+    await assert.rejects(service.list(session));
+    assert.deepEqual(await readdir(outside), []);
+  });
+
+  await t.test("rejects a saved record file symlink", async (t) => {
+    const { directory, service } = await fixture(t);
+    const outside = await mkdtemp(join(tmpdir(), "un-outside-"));
+    t.after(() => rm(outside, { recursive: true, force: true }));
+    const sessionDirectory = join(directory, createHash("sha256").update(session).digest("hex"));
+    await mkdir(sessionDirectory);
+    const outsideFile = join(outside, "secret.json");
+    await writeFile(outsideFile, "local-secret-do-not-return");
+    try {
+      await symlink(outsideFile, join(sessionDirectory, `${"b".repeat(64)}.saved.json`), "file");
+    } catch (error) {
+      if (process.platform === "win32" && error instanceof Error && "code" in error && error.code === "EPERM") {
+        t.skip("File symlinks require Windows Developer Mode or elevated privileges; directory junction checks still run.");
+        return;
+      }
+      throw error;
+    }
+    await assert.rejects(service.list(session));
+    assert.equal(await readFile(outsideFile, "utf8"), "local-secret-do-not-return");
+  });
 });
 
 test("HTTP storage failures expose a safe error without paths or file contents", async (t) => {

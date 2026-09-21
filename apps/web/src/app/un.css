@@ -118,7 +118,6 @@
 .un-demo-card strong { display: inline; font-size: 11px; }
 .un-demo-card p { margin: 8px 0 11px; font-size: 11px; line-height: 1.7; }
 .un-demo-card a { display: flex; align-items: center; gap: 6px; margin-top: 9px; font-size: 11px; text-decoration: none; }
-.un-live-dot { display: inline-block; width: 6px; height: 6px; margin: 0 7px 1px 0; background: #91a474; border-radius: 50%; }
 .un-user { display: flex; align-items: center; gap: 10px; margin-top: 18px; padding: 17px 6px 0; border-top: 1px solid var(--un-line); }
 .un-user strong { display: block; font-size: 11px; }
 .un-user small { display: block; color: var(--un-muted); }
@@ -130,7 +129,6 @@
 .un-topbar > div { display: flex; align-items: center; gap: 19px; }
 .un-slash { margin: 0 13px; color: #68725d; }
 .un-demo-pill { display: flex; align-items: center; gap: 6px; color: #637452; font-size: 11px; }
-.un-demo-pill > span { width: 5px; height: 5px; background: #91a375; border-radius: 50%; }
 .un-top-initial { display: inline-grid; place-items: center; width: 29px; height: 29px; border: 1px solid #dfe5d8; border-radius: 50%; color: #617551; font-size: 11px; }
 .un-breadcrumb { display: flex; align-items: center; gap: 11px; color: #667361; font-size: 11px; }
 .un-breadcrumb strong { color: #475b43; font-weight: 500; }
