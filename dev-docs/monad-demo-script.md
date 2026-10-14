@@ -1,6 +1,6 @@
 # Monad submission video scripts
 
-Project: **UN — Verifiable Property Reviews**. Record the pitch at or below two minutes and the technical demo at or below three minutes. These scripts describe the intended verified flow. Do not read a success claim until the corresponding check in [the submission draft](monad-submission.md) is complete. If a step fails, state that result plainly.
+Receipt module: **UN — Verifiable Property Reviews**. Record the pitch at or below two minutes and the technical demo at or below three minutes. These optional scripts describe the receipt flow, not the team's current portal strategy. Do not read a success claim until the corresponding check in [the submission record](monad-submission.md) is complete. If a step fails, state that result plainly.
 
 The user selected the [existing UN prototype Loom](https://www.loom.com/share/ebc670ceadb14f6caa20623eec5e4040), approximately 4:49. It predates the receipt extension, does not show the Monad flow, and exceeds both requested duration limits. The scripts below are for an optional new recording; they have not been recorded or verified as videos.
 
@@ -41,5 +41,5 @@ If deployment or live verification is incomplete, replace “We built” with �
 - If verification is pending or fails, retain that result and describe it honestly.
 - Avoid detouring into Exa or Ambiguous: the receipt path does not require either service. Ambiguous live task creation is not yet verified for this submission.
 - After recording, check audio, duration, link access, and whether every shown address and transaction matches the submission evidence.
-- The deployed registry is `0x56941693b8b7bac199fdfe8fb15cccf554e13d44` on chain `10143`. The sample receipt, portable API checks, and local browser original/altered-sample checks passed. Browser wallet and public hosted verifier checks remain pending. See the submission evidence for the actual transaction and commitment.
+- The deployed registry is `0x56941693b8b7bac199fdfe8fb15cccf554e13d44` on chain `10143`. The sample receipt, portable API checks, and both local and public hosted browser original/altered-sample checks passed. Interactive browser-wallet checks remain unperformed. See the submission evidence for the actual transaction and commitment.
 - For a walletless judge walkthrough, use the public fictional example once its actual receipt is confirmed. Explain that the sample envelope is intentionally public. The altered-copy demonstration must keep the original file unchanged.

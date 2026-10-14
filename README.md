@@ -42,7 +42,23 @@ UN does not connect a live property database or inbox. **Review records** recalc
 
 The Monad submission adds a reusable review-receipt registry and an independent `/verify` page, with UN as the first integration. A versioned envelope contains the saved review and a private nonce; the browser computes its commitment, and the reviewer explicitly records that commitment from a wallet on Monad Testnet (chain `10143`). The verifier checks the exported packet against the recorded commitment while keeping the packet off-chain.
 
-The registry is [deployed on Monad Testnet](https://testnet.monadexplorer.com/address/0x56941693b8b7bac199fdfe8fb15cccf554e13d44), and a fictional sample has a [confirmed receipt](https://testnet.monadexplorer.com/tx/0x832098fbc82a4fac5dfefe03c61d3d26f572527bae585c0bd777a6e3ae614537) with live API and local browser checks. Public hosted-verifier checks remain pending; see the [submission draft and checklist](dev-docs/monad-submission.md) for confirmed status and the [video scripts](dev-docs/monad-demo-script.md) for the intended demonstration. A receipt identifies a wallet's commitment to a packet, not evidence correctness or professional authority. The property app and sponsor integrations were built before the receipt extension, within the September 1–October 13 event window.
+The registry is [deployed on Monad Testnet with verified source](https://testnet.monadvision.com/address/0x56941693b8B7bAc199fDfE8fB15Cccf554e13d44), and a fictional sample has a [confirmed receipt](https://testnet.monadexplorer.com/tx/0x832098fbc82a4fac5dfefe03c61d3d26f572527bae585c0bd777a6e3ae614537). The [public verifier](https://un-property-review-desk.dudu-f.chatgpt.site/verify) was checked in the browser: load the sample, verify its receipt, then try an altered copy to see the fingerprint mismatch. No login or wallet is needed. See the [submission status and checklist](dev-docs/monad-submission.md) for verification results and the [video scripts](dev-docs/monad-demo-script.md) for an optional receipt-specific recording. A receipt identifies a wallet's commitment to a packet, not evidence correctness or professional authority. The property app and sponsor integrations were built before the receipt extension, within the September 1–October 13 event window.
+
+To use the deployed registry locally, add this server configuration to the root `.env`, then restart the app:
+
+```dotenv
+MONAD_RECEIPT_CONTRACT_ADDRESS=0x56941693b8b7bac199fdfe8fb15cccf554e13d44
+```
+
+Open [`/verify`](http://127.0.0.1:3100/verify), load the fictional sample, and select **Verify on Monad testnet**. Verification needs no wallet. Recording a new receipt from a saved review requires an Ethereum-compatible wallet on Monad Testnet and testnet MON. The app uses the public testnet RPC by default; an optional server-only `MONAD_RPC_URL` must use HTTPS.
+
+Compile the contract without deploying or accessing a wallet:
+
+```bash
+node scripts/deploy-receipts.mjs
+```
+
+This writes compiler input and output to the gitignored `.data/ReviewReceipts.compilation.json`. Deployment is a separate, explicit `--deploy` action; the existing registry is sufficient for the demo.
 
 ### Local checks
 
@@ -50,9 +66,10 @@ The registry is [deployed on Monad Testnet](https://testnet.monadexplorer.com/ad
 npm run typecheck
 npm run verify
 npm run build --workspace web
+npm run check:deployment
 ```
 
-These are local checks. Verify Exa search and Ambiguous create/read-back with the intended accounts before demonstrating live integrations.
+The October 13 local checks passed: workspace typechecks, 39 agent-core tests, 148 web tests, 22 channel tests through an explicit Windows run, 4 gateway tests, the Solidity compilation/ABI check, the production build, and standalone deployment checks. Two web file-symlink cases were skipped because of Windows privileges. Both CI runs passed Linux verification, build, deployment smoke checks, gateway tests, and Docker checks. PR #2 is merged and deployed; the public verifier passed the original/altered-sample browser checks. See the [verification log](dev-docs/monad-submission.md) for scope and remaining checks. Verify Exa search and Ambiguous create/read-back with the intended accounts before demonstrating live integrations.
 
 Supporting workspaces are available at [`/operations`](http://127.0.0.1:3100/operations), [`/advisor`](http://127.0.0.1:3100/advisor), and [`/agent`](http://127.0.0.1:3100/agent).
 
