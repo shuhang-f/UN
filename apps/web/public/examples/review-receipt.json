@@ -1,0 +1,141 @@
+{
+  "envelope": {
+    "schema": "un-review-receipt/v1",
+    "decision": "reviewed",
+    "nonce": "0xb88798c55511ea58c58bb5c2639ae5ee9546fb1a48082be16c31ee40e18d1067",
+    "review": {
+      "id": "91757ebb-43c8-4953-8812-da8ddaa4397f",
+      "createdAt": "2026-10-14T03:01:23.296Z",
+      "simulationDate": "2026-09-12",
+      "destination": "local",
+      "preferences": {
+        "reviewLeadDays": 90,
+        "requestedIncreasePercent": 2,
+        "reviewer": "Monad testnet demo reviewer"
+      },
+      "reviewerNote": "Fictional Unit 04 evidence reviewed for the Monad testnet demonstration. This does not send a notice, establish legal compliance, or change rent.",
+      "packet": {
+        "id": "un-review-un-demo-unit-04-2026-10-12",
+        "unit": {
+          "id": "un-demo-unit-04",
+          "unitNumber": "04",
+          "propertyName": "Juniper Court · fictional portfolio",
+          "address": "100 Example Lane, Los Angeles, CA · fictional address",
+          "residentName": "Demo Resident 04",
+          "leaseEnd": "2026-10-12",
+          "baseRent": 2000,
+          "lastIncreaseDate": "2025-10-13",
+          "correspondenceIncreaseDate": "2025-10-13",
+          "coverage": "confirmed",
+          "registrationVerified": true,
+          "evidence": [
+            {
+              "id": "un-demo-unit-04-lease",
+              "kind": "lease",
+              "title": "Unit 04 · sample signed lease",
+              "date": "2026-09-01",
+              "body": "FICTIONAL DEMO RECORD. Demo Resident 04's lease ends 2026-10-12. The sample file has no renewal amendment or special adjustment approval. Lease terms and required notice wording still need review before any real notice."
+            },
+            {
+              "id": "un-demo-unit-04-ledger",
+              "kind": "ledger",
+              "title": "Unit 04 · sample rent ledger",
+              "date": "2026-09-10",
+              "body": "FICTIONAL DEMO RECORD. Lawful monthly base rent in this sample is $2000.00. The ledger records the last ordinary increase on 2025-10-13. No separate surcharges are included in the base rent."
+            },
+            {
+              "id": "un-demo-unit-04-email",
+              "kind": "email",
+              "title": "Unit 04 · manager correspondence",
+              "date": "2026-09-11",
+              "body": "FICTIONAL DEMO MESSAGE. Please prepare the approaching lease review using our confirmed pricing preference. My notes show the last rent increase was 2025-10-13. Compare this with the ledger before preparing the draft."
+            },
+            {
+              "id": "un-demo-unit-04-registration",
+              "kind": "registration",
+              "title": "Unit 04 · sample registration and coverage record",
+              "date": "2026-01-15",
+              "body": "FICTIONAL DEMO RECORD. Current registration evidence and unit-specific LA City RSO coverage are treated as verified for Unit 04 in this simulation. No actual property lookup has been performed."
+            }
+          ]
+        },
+        "status": "draft-ready",
+        "summary": "Internal draft prepared: $2,000.00 → $2,040.00 on 2026-10-13, using the manager's 2% instruction.",
+        "daysUntilRenewal": 30,
+        "effectiveDate": "2026-10-13",
+        "nextEligibleDate": "2026-10-13",
+        "requestedIncreasePercent": 2,
+        "requestedRent": 2040,
+        "capPercent": 3,
+        "maximumRent": 2060,
+        "blockers": [],
+        "evidence": [
+          {
+            "id": "un-demo-unit-04-lease",
+            "kind": "lease",
+            "title": "Unit 04 · sample signed lease",
+            "date": "2026-09-01",
+            "body": "FICTIONAL DEMO RECORD. Demo Resident 04's lease ends 2026-10-12. The sample file has no renewal amendment or special adjustment approval. Lease terms and required notice wording still need review before any real notice."
+          },
+          {
+            "id": "un-demo-unit-04-ledger",
+            "kind": "ledger",
+            "title": "Unit 04 · sample rent ledger",
+            "date": "2026-09-10",
+            "body": "FICTIONAL DEMO RECORD. Lawful monthly base rent in this sample is $2000.00. The ledger records the last ordinary increase on 2025-10-13. No separate surcharges are included in the base rent."
+          },
+          {
+            "id": "un-demo-unit-04-email",
+            "kind": "email",
+            "title": "Unit 04 · manager correspondence",
+            "date": "2026-09-11",
+            "body": "FICTIONAL DEMO MESSAGE. Please prepare the approaching lease review using our confirmed pricing preference. My notes show the last rent increase was 2025-10-13. Compare this with the ledger before preparing the draft."
+          },
+          {
+            "id": "un-demo-unit-04-registration",
+            "kind": "registration",
+            "title": "Unit 04 · sample registration and coverage record",
+            "date": "2026-01-15",
+            "body": "FICTIONAL DEMO RECORD. Current registration evidence and unit-specific LA City RSO coverage are treated as verified for Unit 04 in this simulation. No actual property lookup has been performed."
+          },
+          {
+            "id": "un-rule-la-city-rso-2026-2027",
+            "kind": "rule",
+            "title": "LAHD · LA City RSO ordinary annual adjustment, 2026–2027",
+            "date": "2026-09-12",
+            "body": "Reviewed public source: the ordinary adjustment is 3% for July 1, 2026–June 30, 2027, subject to the 12-month interval and other requirements. No additional utility percentage is added. Separate permitted charges and special adjustments are outside this demo.",
+            "url": "https://housing.lacity.gov/wp-content/uploads/2022/01/Allowable-Rent-Increase-Bulletin-English.pdf"
+          }
+        ],
+        "tasks": [
+          {
+            "title": "Review the internal draft and service requirements",
+            "owner": "Monad testnet demo reviewer",
+            "details": "Validate lease terms, required notice period, service method, current registration and mandatory template wording. Record the review decision; saving a packet does not serve a notice or change ledger rent."
+          }
+        ],
+        "draft": {
+          "title": "Internal rent-increase working draft · Unit 04",
+          "body": "INTERNAL SIMULATED NOTICE — PENDING REVIEW\nFictional demo data. This illustrative template is not legally vetted or ready to serve.\n\nPrepared on: 2026-09-12\nReviewer: Monad testnet demo reviewer\nProperty: Juniper Court · fictional portfolio\nAddress: 100 Example Lane, Los Angeles, CA · fictional address\nUnit: 04\nResident: Demo Resident 04\n\nPROPOSED NOTICE TEXT\nDear Demo Resident 04,\nWe are proposing to increase the monthly base rent for Unit 04 at Juniper Court · fictional portfolio from $2,000.00 to $2,040.00, effective 2026-10-13. This is a monthly increase of $40.00 (2%).\n[Insert reviewed mandatory notice language, issuer details, and applicable attachments before final approval.]\n\nINTERNAL REVIEW NOTES\nProposed monthly base rent: $2,040.00\nCurrent monthly base rent: $2,000.00\nProposed monthly change: $40.00 (2%)\nCandidate effective date: 2026-10-13\nLease end: 2026-10-12; recorded last increase: 2025-10-13\n\nManager instruction: 2%. The reviewed ordinary ceiling is 3% ($2,060.00 base rent), a limit rather than a pricing instruction.\nThis calculation excludes separate permitted charges and special adjustment approvals. No utility percentage is added.\n\nSource: LAHD · LA City RSO ordinary annual adjustment, 2026–2027\nSource URL: https://housing.lacity.gov/wp-content/uploads/2022/01/Allowable-Rent-Increase-Bulletin-English.pdf\nRule period: 2026-07-01–2027-06-30; source checked: 2026-09-12\nTemplate: un-illustrative-internal-v2\n\nPENDING: Reviewer must validate lease terms, applicable notice period, service method and date, current registration, and final mandatory wording using a reviewed local template. The 90-day review window is an internal preference, not a legal notice period.\nNo notice has been sent or served. No ledger rent or tenancy status has been changed.",
+          "templateVersion": "un-illustrative-internal-v2"
+        },
+        "rule": {
+          "title": "LAHD · LA City RSO ordinary annual adjustment, 2026–2027",
+          "url": "https://housing.lacity.gov/wp-content/uploads/2022/01/Allowable-Rent-Increase-Bulletin-English.pdf",
+          "effectiveFrom": "2026-07-01",
+          "effectiveTo": "2027-06-30",
+          "verifiedAt": "2026-09-12"
+        }
+      }
+    }
+  },
+  "commitment": "0xd04443650bae86c436c711ad498776a149c2cd64d55b36fa2fdaa7e8c07cdc1d",
+  "receipt": {
+    "chainId": 10143,
+    "contractAddress": "0x56941693b8B7bAc199fDfE8fB15Cccf554e13d44",
+    "transactionHash": "0x832098fbc82a4fac5dfefe03c61d3d26f572527bae585c0bd777a6e3ae614537",
+    "reviewer": "0x27123352229cCdCF471BB6152E54E6dAbD5FF021",
+    "blockNumber": "70853978",
+    "recordedAt": "2026-10-14T03:01:23.000Z"
+  }
+}

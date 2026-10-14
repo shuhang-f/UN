@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">UN</title>
+  <desc id="desc">UN wordmark in dark green on a warm white square with an orange dot.</desc>
+  <rect width="512" height="512" rx="88" fill="#f5f3ee"/>
+  <g fill="none" stroke="#223129" stroke-width="32" stroke-linecap="square" stroke-linejoin="bevel">
+    <path d="M108 159v135c0 44 24 65 59 65s59-21 59-65V159"/>
+    <path d="M291 349V159l107 190V159"/>
+  </g>
+  <circle cx="433" cy="366" r="15" fill="#dc714c"/>
+</svg>
