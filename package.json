@@ -24,13 +24,14 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "dev:web": "npm run dev --workspace web",
     "test": "npm run test --workspaces --if-present",
-    "verify": "npm run typecheck && npm test"
+    "verify": "npm run typecheck && npm test && node --test contracts/ReviewReceipts.test.mjs"
   },
   "overrides": {
     "@ag-ui/client": "0.0.59"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
+    "solc": "^0.8.31",
     "tsx": "^4.23.1",
     "typescript": "^5.7.0"
   }

@@ -38,6 +38,14 @@ UN does not connect a live property database or inbox. **Review records** recalc
 
 ## Development
 
+### Monad review receipts
+
+The Monad submission adds a reusable review-receipt registry and an independent `/verify` page, with UN as the first integration. A versioned envelope contains the saved review and a private nonce; the browser computes its commitment, and the reviewer explicitly records that commitment from a wallet on Monad Testnet (chain `10143`). The verifier checks the exported packet against the recorded commitment while keeping the packet off-chain.
+
+The registry is [deployed on Monad Testnet](https://testnet.monadexplorer.com/address/0x56941693b8b7bac199fdfe8fb15cccf554e13d44), and a fictional sample has a [confirmed receipt](https://testnet.monadexplorer.com/tx/0x832098fbc82a4fac5dfefe03c61d3d26f572527bae585c0bd777a6e3ae614537) with live API and local browser checks. Public hosted-verifier checks remain pending; see the [submission draft and checklist](dev-docs/monad-submission.md) for confirmed status and the [video scripts](dev-docs/monad-demo-script.md) for the intended demonstration. A receipt identifies a wallet's commitment to a packet, not evidence correctness or professional authority. The property app and sponsor integrations were built before the receipt extension, within the September 1–October 13 event window.
+
+### Local checks
+
 ```bash
 npm run typecheck
 npm run verify
