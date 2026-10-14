@@ -58,6 +58,10 @@
 .unr-file-name { color: var(--unr-muted); overflow-wrap: anywhere; }
 .unr-verify-footer { padding: 25px 0 0; color: var(--unr-muted); font-size: 12px; }
 .unr-verify-footer p { max-width: 650px; margin-bottom: 20px; }
+.unr-footer-links { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.un-page-footer .unr-monad-credit, .unr-verify-footer .unr-monad-credit { display: inline-flex; align-items: center; gap: 5px; min-height: 36px; padding: 7px 12px; border: 1px solid #ddd6f0; border-radius: 7px; background: #f3efff; color: #5d469b; font-size: 11px; line-height: 1.5; white-space: nowrap; text-decoration: none; }
+.unr-monad-credit strong { font-weight: 600; }
+.un-page-footer .unr-monad-credit:hover, .unr-verify-footer .unr-monad-credit:hover { border-color: #a896d2; background: #ebe4ff; }
 @media (max-width: 600px) {
   .un-topbar:has(.unr-verify-link) { flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
   .unr-card { padding: 18px; }
